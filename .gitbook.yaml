@@ -1,0 +1,10 @@
+# .gitbook.yaml
+# GitBook Git Sync configuration for QuantuM® docs.
+# Docs live at the repository root. README.md is the introduction,
+# SUMMARY.md defines the sidebar structure.
+
+root: ./
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md

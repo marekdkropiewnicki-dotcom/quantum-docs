@@ -6,15 +6,16 @@
 
 ---
 
-## Tydzień 1 — 16–22 maja: Fundament + ślad strategii
+## Tydzień 1 — 16–22 maja: Fundament + ślad strategii ✅
 
-- [x] **Pole strategiczne w `quantum-docs`** — manifest, teza, architektura, ADR (ten commit).
-- [ ] **Repo `proquant-core`** — pusta struktura `app/`, `tests/`, `evals/`, `mcp/`, `infra/`.
-- [ ] **FastAPI hello-world na Railway** — endpoint `/health` + structured logging (structlog).
-- [ ] **Supabase schema** — tabele `decisions`, `decision_outcomes`, `users`, RLS włączone od dnia 1.
-- [ ] **Promptfoo skeleton w CI** — 10 testów ewaluacyjnych dla wstępnego prompta tezy.
+- [x] **Pole strategiczne w `quantum-docs`** — manifest, teza, architektura, ADR. *Commit [`525c217`](https://github.com/marekdkropiewnicki-dotcom/quantum-docs/commit/525c217).*
+- [x] **Repo `proquant-core`** — struktura `app/`, `tests/`, `evals/`, `mcp/`, `infra/`. *[proquant-core](https://github.com/marekdkropiewnicki-dotcom/proquant-core).*
+- [x] **FastAPI hello-world lokalnie** — endpoint `/health` + structured logging (structlog). *5/5 testów green, 83% coverage.*
+- [x] **Supabase schema** — `users`, `consents`, `decisions` (APPEND-ONLY), `decision_outcomes`. RLS włączone od dnia 1. *Plik [`infra/supabase_schema.sql`](https://github.com/marekdkropiewnicki-dotcom/proquant-core/blob/main/infra/supabase_schema.sql).*
+- [x] **Promptfoo skeleton w CI** — 2 smoke testy (MiCA disclaimer + format). Tydzień 3 rozszerza do 50.
+- [ ] **Realny deploy na Railway** — wymaga dodania `ANTHROPIC_API_KEY` i kluczy Supabase do Railway secrets *(zadanie operacyjne, nie deweloperskie)*.
 
-**Definicja done:** `curl proquant-core.up.railway.app/health` → 200 OK, GitHub Actions zielone.
+**Definicja done:** GitHub Actions zielone ✅, `curl localhost:8765/health` → 200 ✅. Brakuje tylko Railway deploy (blocker = secrets, nie kod).
 
 ---
 

@@ -13,7 +13,7 @@
 - [x] **FastAPI hello-world lokalnie** — endpoint `/health` + structured logging (structlog). *5/5 testów green, 83% coverage.*
 - [x] **Supabase schema** — `users`, `consents`, `decisions` (APPEND-ONLY), `decision_outcomes`. RLS włączone od dnia 1. *Plik [`infra/supabase_schema.sql`](https://github.com/marekdkropiewnicki-dotcom/proquant-core/blob/main/infra/supabase_schema.sql).*
 - [x] **Promptfoo skeleton w CI** — 2 smoke testy (MiCA disclaimer + format). Tydzień 3 rozszerza do 50.
-- [x] **Realny deploy na Railway** — `/health` zwraca 200 na `https://api-production-11fb.up.railway.app/health`. Klucze sekretne (Anthropic, Supabase service_role) do uzupełnienia gdy operator wróci na desktop.
+- [x] **Realny deploy na Railway** — `/health` zwraca 200 na `https://api-production-11fb.up.railway.app/health`. Klucze sekretne (Anthropic, Supabase service_role) wpięte 20.05.2026.
 
 **Definicja done:** GitHub Actions zielone ✅, `/health` w produkcji → 200 ✅. Tydzień 1 closed.
 
@@ -30,12 +30,15 @@
 
 **Definicja done:** 42/42 testów green, 68% coverage, `POST /decide` zwraca strukturyzowaną odpowiedź zgodną ze schema. Tydzień 2 closed.
 
+**Update 20.05.2026 — E2E LIVE:** `POST /decide` na produkcji zwraca 200 z `decision_id`, routing fast→Haiku 4.5 (€0.003) + reasoning→Sonnet 4.6 (€0.008), Supabase logging działa, cost_guard czyta. Commit [`6a57431`](https://github.com/marekdkropiewnicki-dotcom/proquant-core/commit/6a57431) (fast lane przeniesiony z `llama-4-scout` na `claude-haiku-4-5` do czasu integracji Groq w tygodniu 3). Pricing: dodano `claude-opus-4-7` (€5/€25) jako high-stakes override.
+
 ---
 
 ## Tydzień 3 — 30 maja–5 czerwca: Trzy lane'y + budget guard
 
-- [ ] **Router (Haiku / Sonnet / Opus)** w hooks Claude Agent SDK.
-- [ ] **Budget guard** — hard limit $5/dzień/user, hard limit $50/dzień globalny.
+- [x] **Router (Haiku 4.5 / Sonnet 4.6 / Opus 4.7)** — zrobione 20.05 (commit `6a57431`). Wszystkie 3 modele potwierdzone działające z kluczem.
+- [ ] **Integracja Groq** — `app/agent/groq_client.py` + przeniesienie fast lane z Haiku na Llama 4 Scout (10x taniej).
+- [ ] **Budget guard** — hard limit €5/dzień/user, hard limit €50/dzień globalny (race condition #14 fix).
 - [ ] **Counterfactual replay** — endpoint `/replay/{decision_id}` pokazujący „co by się stało, gdybyś nie zrobił".
 - [ ] **Sleep-well score** — pytanie po każdej decyzji, zapis 1–10.
 
